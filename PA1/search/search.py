@@ -88,54 +88,58 @@ def depthFirstSearch(problem):
     """
     "*** YOUR CODE HERE ***"
     # print "Start:", problem.getStartState()
-    # print "Is the start a goal?", problem.isGoalState(problem.getStartState())
-    # print "Start's successors:", problem.getSuccessors(problem.getStartState())
-    if problem.isGoalState(problem.getStartState()):
-        return []
-    
+    if(problem.isGoalState(problem.getStartState())): return []
     frontier = util.Stack()
     visited = list()
-    
+    visited.append(problem.getStartState())
     frontier.push( (problem.getStartState(), []) )
-    visited.append( problem.getStartState() )
-
     while not frontier.isEmpty():
         state, actions = frontier.pop()
         for next_state in problem.getSuccessors(state):
             n_state = next_state[0]
             n_direction = next_state[1]
+            if problem.isGoalState(n_state):
+                return actions + [n_direction]
             if n_state not in visited:
-                if problem.isGoalState(n_state):
-                    #print 'Find Goal'
-                    return actions + [n_direction]
-                else:
-                    frontier.push( (n_state, actions + [n_direction]) )
-                    visited.append( n_state )
+                frontier.push( (n_state, actions + [n_direction]) )
+                visited.append( n_state )
     return []
 
 def breadthFirstSearch(problem):
     """Search the shallowest nodes in the search tree first."""
     "*** YOUR CODE HERE ***"
-    if problem.isGoalState(problem.getStartState()):
-        return []
     frontier = util.Queue()
     visited = list()
     frontier.push( (problem.getStartState(), []) )
-    visited.append( problem.getStartState() )
-
     while not frontier.isEmpty():
         state, actions = frontier.pop()
+        if problem.isGoalState(state):
+            # print visited
+            return actions
+        if state not in visited:
+            visited.append(state)
         for next_state in problem.getSuccessors(state):
             n_state = next_state[0]
             n_direction = next_state[1]
             if n_state not in visited:
-                if problem.isGoalState(n_state):
-                    #print 'Find Goal'
-                    return actions + [n_direction]
-                else:
-                    frontier.push( (n_state, actions + [n_direction]) )
-                    visited.append( n_state )
+                frontier.push( (n_state, actions + [n_direction]) )
+                visited.append( n_state )
+                # print n_state
     return []
+
+
+import heapq
+def update(frontier, item, priority):
+    for index, (p, c, i) in enumerate(frontier.heap):
+        if i[0] == item[0]:
+            if p <= priority:
+                break
+            del frontier.heap[index]
+            frontier.heap.append((priority, c, item))
+            heapq.heapify(frontier.heap)
+            break
+    else:
+        frontier.push(item, priority)
 
 
 def uniformCostSearch(problem):
@@ -144,8 +148,6 @@ def uniformCostSearch(problem):
     frontier = util.PriorityQueue()
     visited = list()
     frontier.push( (problem.getStartState(), []), 0)
-    # visited.append( problem.getStartState() )
-
     while not frontier.isEmpty():
         state, actions = frontier.pop()
         if problem.isGoalState(state):
@@ -156,7 +158,7 @@ def uniformCostSearch(problem):
             n_state = next_state[0]
             n_direction = next_state[1]
             if n_state not in visited:
-                frontier.update((n_state, actions + [n_direction]), problem.getCostOfActions(actions + [n_direction]))
+                update(frontier, (n_state, actions + [n_direction]), problem.getCostOfActions(actions + [n_direction]))
     return []
 
 def nullHeuristic(state, problem=None):
@@ -182,7 +184,7 @@ def aStarSearch(problem, heuristic=nullHeuristic):
             n_state = next_state[0]
             n_direction = next_state[1]
             if n_state not in visited:
-                frontier.update((n_state, actions + [n_direction]), problem.getCostOfActions(actions + [n_direction]) + heuristic(n_state, problem))
+                update(frontier, (n_state, actions + [n_direction]), problem.getCostOfActions(actions + [n_direction]) + heuristic(n_state, problem))
     return []
 
 

@@ -1,0 +1,482 @@
+{
+	"auto_complete":
+	{
+		"selected_items":
+		[
+			[
+				"qui",
+				"quickSort"
+			],
+			[
+				"strictE",
+				"assert.strictEqual"
+			],
+			[
+				"lis",
+				"listLen〔variable〕"
+			],
+			[
+				"compe",
+				"competitionList"
+			],
+			[
+				"home",
+				"home_url〔variable〕"
+			]
+		]
+	},
+	"buffers":
+	[
+		{
+			"file": "PA1/search/game.py",
+			"settings":
+			{
+				"buffer_size": 25518,
+				"line_ending": "Unix"
+			}
+		}
+	],
+	"build_system": "",
+	"build_system_choices":
+	[
+	],
+	"build_varint": "",
+	"command_palette":
+	{
+		"height": 357.0,
+		"last_filter": "ins",
+		"selected_items":
+		[
+			[
+				"ins",
+				"Package Control: Install Package"
+			],
+			[
+				"preferences",
+				"Preferences: MarkdownEditing Settings – Default"
+			],
+			[
+				"install ",
+				"Package Control: Install Package"
+			],
+			[
+				"rem",
+				"Package Control: Remove Package"
+			],
+			[
+				"Package Control: in",
+				"Package Control: Install Package"
+			],
+			[
+				"remo",
+				"Package Control: Remove Package"
+			],
+			[
+				"instal",
+				"Package Control: Install Package"
+			],
+			[
+				"re",
+				"Package Control: Remove Package"
+			],
+			[
+				"Package Control: ",
+				"Package Control: List Packages"
+			],
+			[
+				"install",
+				"Package Control: Install Package"
+			],
+			[
+				"remove",
+				"Package Control: Remove Package"
+			],
+			[
+				" install packa",
+				"Package Control: Install Package"
+			],
+			[
+				"pac",
+				"Install Package Control"
+			]
+		],
+		"width": 670.0
+	},
+	"console":
+	{
+		"height": 130.0,
+		"history":
+		[
+		]
+	},
+	"distraction_free":
+	{
+		"menu_visible": true,
+		"show_minimap": false,
+		"show_open_files": false,
+		"show_tabs": false,
+		"side_bar_visible": false,
+		"status_bar_visible": false
+	},
+	"expanded_folders":
+	[
+		"/Users/zhixingzhang/Documents/大三下/AI_Assignment",
+		"/Users/zhixingzhang/Documents/大三下/AI_Assignment/PA1",
+		"/Users/zhixingzhang/Documents/大三下/AI_Assignment/PA1/search"
+	],
+	"file_history":
+	[
+		"/Users/zhixingzhang/Program/algorithm_learn/java_learn/CCF_6.java",
+		"/Users/zhixingzhang/Library/Application Support/Sublime Text 3/Packages/MarkdownEditing/Markdown.sublime-settings",
+		"/Users/zhixingzhang/Library/Application Support/Sublime Text 3/Packages/User/Markdown.sublime-settings",
+		"/Users/zhixingzhang/Program/test.md",
+		"/Users/zhixingzhang/Library/Application Support/Sublime Text 3/Packages/User/MultiMarkdown.sublime-settings",
+		"/Users/zhixingzhang/Library/Application Support/Sublime Text 3/Packages/MarkdownEditing/MultiMarkdown.sublime-settings",
+		"/Users/zhixingzhang/Program/algorithm_learn/java_learn/CCF_1.java",
+		"/Users/zhixingzhang/Program/algorithm_learn/java_learn/CCF_2.java",
+		"/Users/zhixingzhang/Program/algorithm_learn/java_learn/Solution.java",
+		"/Users/zhixingzhang/Program/algorithm_learn/java_learn/Backpack.java",
+		"/Users/zhixingzhang/Library/Application Support/Sublime Text 3/Packages/User/Default (OSX).sublime-keymap",
+		"/Users/zhixingzhang/Program/algorithm_learn/java_learn/FastPow.java",
+		"/Users/zhixingzhang/Program/algorithm_learn/java_learn/Prime.java",
+		"/Users/zhixingzhang/Program/algorithm_learn/java_learn/POJ1064.java",
+		"/Users/zhixingzhang/Program/a l",
+		"/Users/zhixingzhang/Program/date.py",
+		"/Users/zhixingzhang/Program/algorithm_learn/java_learn/Sort.java",
+		"/Users/zhixingzhang/Program/java_learn/Sort.java",
+		"/Users/zhixingzhang/Program/HuffmanCompression.py",
+		"/Users/zhixingzhang/Program/node_learn/myscript.js",
+		"/Users/zhixingzhang/Program/no de",
+		"/Users/zhixingzhang/Program/node_learn/tweet.js",
+		"/Users/zhixingzhang/Program/node_learn/index.html",
+		"/Users/zhixingzhang/Program/node_learn/views/partials/stylesheet.html",
+		"/Users/zhixingzhang/Program/node_learn/views/partials/chirp.html",
+		"/Users/zhixingzhang/Program/node_learn/public/index.html",
+		"/Users/zhixingzhang/Program/node_learn/public/layout.html",
+		"/Users/zhixingzhang/Program/node_learn/test.js",
+		"/Users/zhixingzhang/Program/node_learn/public/style.css",
+		"/Users/zhixingzhang/Program/node_learn/views/partials/stylesheet.css",
+		"/Users/zhixingzhang/Program/node_learn/chat.js",
+		"/Users/zhixingzhang/Program/node_learn/hello.js",
+		"/Users/zhixingzhang/Program/Full_Stack/hello.html",
+		"/Users/zhixingzhang/Program/java learn/test.java",
+		"/Users/zhixingzhang/Program/java learn/GuessGame/GameLauncher.java",
+		"/Users/zhixingzhang/Program/java learn/GuessGame/GuessGame.java",
+		"/Users/zhixingzhang/Program/java learn/GuessGame/Player.java",
+		"/Users/zhixingzhang/Program/GuessGame.java",
+		"/Users/zhixingzhang/Program/java learn/guessGame.java",
+		"/Users/zhixingzhang/Program/Full_Stack/style.css",
+		"/Users/zhixingzhang/Program/Full_Stack/app.js",
+		"/Users/zhixingzhang/Program/server test/file_recv.py",
+		"/Users/zhixingzhang/Program/node_learn/requestHandlers.js",
+		"/Users/zhixingzhang/Program/node_learn/router.js",
+		"/Users/zhixingzhang/anaconda3/lib/python3.6/site-packages/wechat_sdk/context/newfile",
+		"/Users/zhixingzhang/Desktop/matching.cpp",
+		"/Users/zhixingzhang/Program/CLMS-SigmaGo/src/CLMS/manage.py",
+		"/Users/zhixingzhang/Program/CLMS-SigmaGo/README.md"
+	],
+	"find":
+	{
+		"height": 24.0
+	},
+	"find_in_files":
+	{
+		"height": 0.0,
+		"where_history":
+		[
+		]
+	},
+	"find_state":
+	{
+		"case_sensitive": false,
+		"find_history":
+		[
+		],
+		"highlight": true,
+		"in_selection": false,
+		"preserve_case": false,
+		"regex": false,
+		"replace_history":
+		[
+		],
+		"reverse": false,
+		"show_context": true,
+		"use_buffer2": true,
+		"whole_word": false,
+		"wrap": true
+	},
+	"groups":
+	[
+		{
+			"selected": 0,
+			"sheets":
+			[
+				{
+					"buffer": 0,
+					"file": "PA1/search/game.py",
+					"semi_transient": true,
+					"settings":
+					{
+						"buffer_size": 25518,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								0,
+								0
+							]
+						],
+						"settings":
+						{
+							"bracket_highlighter.busy": false,
+							"bracket_highlighter.clone": 64,
+							"bracket_highlighter.clone_locations":
+							{
+								"close":
+								{
+								},
+								"icon":
+								{
+								},
+								"open":
+								{
+								},
+								"unmatched":
+								{
+								}
+							},
+							"bracket_highlighter.clone_regions":
+							[
+								"bh_curly",
+								"bh_curly_center",
+								"bh_curly_open",
+								"bh_curly_close",
+								"bh_curly_content",
+								"bh_angle",
+								"bh_angle_center",
+								"bh_angle_open",
+								"bh_angle_close",
+								"bh_angle_content",
+								"bh_single_quote",
+								"bh_single_quote_center",
+								"bh_single_quote_open",
+								"bh_single_quote_close",
+								"bh_single_quote_content",
+								"bh_unmatched",
+								"bh_unmatched_center",
+								"bh_unmatched_open",
+								"bh_unmatched_close",
+								"bh_unmatched_content",
+								"bh_regex",
+								"bh_regex_center",
+								"bh_regex_open",
+								"bh_regex_close",
+								"bh_regex_content",
+								"bh_default",
+								"bh_default_center",
+								"bh_default_open",
+								"bh_default_close",
+								"bh_default_content",
+								"bh_round",
+								"bh_round_center",
+								"bh_round_open",
+								"bh_round_close",
+								"bh_round_content",
+								"bh_c_define",
+								"bh_c_define_center",
+								"bh_c_define_open",
+								"bh_c_define_close",
+								"bh_c_define_content",
+								"bh_double_quote",
+								"bh_double_quote_center",
+								"bh_double_quote_open",
+								"bh_double_quote_close",
+								"bh_double_quote_content",
+								"bh_square",
+								"bh_square_center",
+								"bh_square_open",
+								"bh_square_close",
+								"bh_square_content",
+								"bh_tag",
+								"bh_tag_center",
+								"bh_tag_open",
+								"bh_tag_close",
+								"bh_tag_content"
+							],
+							"bracket_highlighter.locations":
+							{
+								"close":
+								{
+								},
+								"icon":
+								{
+								},
+								"open":
+								{
+								},
+								"unmatched":
+								{
+								}
+							},
+							"bracket_highlighter.regions":
+							[
+								"bh_curly",
+								"bh_curly_center",
+								"bh_curly_open",
+								"bh_curly_close",
+								"bh_curly_content",
+								"bh_angle",
+								"bh_angle_center",
+								"bh_angle_open",
+								"bh_angle_close",
+								"bh_angle_content",
+								"bh_single_quote",
+								"bh_single_quote_center",
+								"bh_single_quote_open",
+								"bh_single_quote_close",
+								"bh_single_quote_content",
+								"bh_unmatched",
+								"bh_unmatched_center",
+								"bh_unmatched_open",
+								"bh_unmatched_close",
+								"bh_unmatched_content",
+								"bh_regex",
+								"bh_regex_center",
+								"bh_regex_open",
+								"bh_regex_close",
+								"bh_regex_content",
+								"bh_default",
+								"bh_default_center",
+								"bh_default_open",
+								"bh_default_close",
+								"bh_default_content",
+								"bh_round",
+								"bh_round_center",
+								"bh_round_open",
+								"bh_round_close",
+								"bh_round_content",
+								"bh_c_define",
+								"bh_c_define_center",
+								"bh_c_define_open",
+								"bh_c_define_close",
+								"bh_c_define_content",
+								"bh_double_quote",
+								"bh_double_quote_center",
+								"bh_double_quote_open",
+								"bh_double_quote_close",
+								"bh_double_quote_content",
+								"bh_square",
+								"bh_square_center",
+								"bh_square_open",
+								"bh_square_close",
+								"bh_square_content",
+								"bh_tag",
+								"bh_tag_center",
+								"bh_tag_open",
+								"bh_tag_close",
+								"bh_tag_content"
+							],
+							"origin_encoding": "ASCII",
+							"syntax": "Packages/Python/Python.sublime-syntax",
+							"tab_size": 4,
+							"translate_tabs_to_spaces": true
+						},
+						"translation.x": 95.0,
+						"translation.y": 12933.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 0,
+					"type": "text"
+				}
+			]
+		}
+	],
+	"incremental_find":
+	{
+		"height": 24.0
+	},
+	"input":
+	{
+		"height": 64.0
+	},
+	"layout":
+	{
+		"cells":
+		[
+			[
+				0,
+				0,
+				1,
+				1
+			]
+		],
+		"cols":
+		[
+			0.0,
+			1.0
+		],
+		"rows":
+		[
+			0.0,
+			1.0
+		]
+	},
+	"menu_visible": true,
+	"output.find_results":
+	{
+		"height": 0.0
+	},
+	"output.mdpopups":
+	{
+		"height": 0.0
+	},
+	"pinned_build_system": "",
+	"project": "AI_assignment.sublime-project",
+	"replace":
+	{
+		"height": 44.0
+	},
+	"save_all_on_build": true,
+	"select_file":
+	{
+		"height": 0.0,
+		"last_filter": "",
+		"selected_items":
+		[
+		],
+		"width": 0.0
+	},
+	"select_project":
+	{
+		"height": 0.0,
+		"last_filter": "",
+		"selected_items":
+		[
+		],
+		"width": 0.0
+	},
+	"select_symbol":
+	{
+		"height": 0.0,
+		"last_filter": "",
+		"selected_items":
+		[
+		],
+		"width": 0.0
+	},
+	"selected_group": 0,
+	"settings":
+	{
+	},
+	"show_minimap": true,
+	"show_open_files": true,
+	"show_tabs": true,
+	"side_bar_visible": true,
+	"side_bar_width": 213.0,
+	"status_bar_visible": true,
+	"template_settings":
+	{
+	}
+}

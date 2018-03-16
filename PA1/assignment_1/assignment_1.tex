@@ -13,6 +13,8 @@
 \usepackage{listings} % Required for insertion of code
 \usepackage{courier} % Required for the courier font
 \usepackage{lipsum} % Used for inserting dummy 'Lorem ipsum' text into the template
+\usepackage{booktabs}
+\usepackage{multirow}
 
 % Margins
 \topmargin=-0.45in
@@ -172,9 +174,67 @@
 % To have just one problem per page, simply put a \clearpage after each problem
 
 \begin{homeworkProblem}
-Listing \ref{homework_example} shows a Perl script.
+寻找固定位置的豆子包含下面四个问题：\\
+1. \homeworkSectionName{Finding a Fixed Food Dot using Depth First Search}\\
+2. \homeworkSectionName{Breadth First Search}\\
+3. \homeworkSectionName{Varying the Cost Function}\\
+4. \homeworkSectionName{A* search}\\
+算法在search.py中进行了实现，对各种算法在不同地图下的测试结果如表\ref{算法比较}：\\
 
-\pythonscript{homework_example}{Sample Perl Script With Highlighting}
+% Please add the following required packages to your document preamble:
+
+\begin{table}[ht]
+\centering
+\caption{各种算法在不同地图下的性能比较}
+\label{算法比较}
+\begin{tabular}{@{}c|cccc@{}}
+\toprule
+\textbf{Maps}                         & \textbf{Alg} & \textbf{Search nodes expanded} & \multicolumn{1}{l}{\textbf{Total Costs}} & \textbf{Scores} \\ \midrule
+\multirow{4}{*}{\textbf{tiny maze}}   & \textbf{DFS} & 14                             & 10                                       & 500             \\
+                                      & \textbf{BFS} & 15                             & 8                                        & 502             \\
+                                      & \textbf{UCS} & 15                             & 8                                        & 502             \\
+                                      & \textbf{A*}  & 14                             & 8                                        & 502             \\ \midrule
+\multirow{4}{*}{\textbf{medium maze}} & \textbf{DFS} & 144                            & 130                                      & 380             \\
+                                      & \textbf{BFS} & 269                            & 68                                       & 422             \\
+                                      & \textbf{UCS} & 269                            & 68                                       & 422             \\
+                                      & \textbf{A*}  & 221                            & 68                                       & 442             \\ \midrule
+\multirow{4}{*}{\textbf{big maze}}    & \textbf{DFS} & 390                            & 210                                      & 300             \\
+                                      & \textbf{BFS} & 620                            & 210                                      & 300             \\
+                                      & \textbf{UCS} & 620                            & 210                                      & 300             \\
+                                      & \textbf{A*}  & 549                            & 210                                      & 300             \\ \bottomrule
+\end{tabular}
+\end{table}
+
+\paragraph{测试结果分析:}
+从测试结果中可以看出在不同尺度的地图下，各种算法各有优劣之处，在地图所展现的数量级上没有表现出明显的差异。
+
+
+%表\ref{Question1/dfs}是实现算法
+%
+%\pythonscript{Question1/dfs}{Sample Perl Script With Highlighting}
+%使用DFS对三种地图进行测试，测试结果分别如下：\\
+%\begin{figure}[ht]
+%\centering
+%\includegraphics[scale=0.6]{Question1/dfs_tinyMaze.png}
+%\caption{DFS performance in tiny maze}
+%\label{fig:dfs_tinyMaze}
+%\end{figure}
+%
+%\begin{figure}[ht]
+%\centering
+%\includegraphics[scale=0.55]{Question1/dfs_mediumMaze.png}
+%\caption{DFS performance in medium maze}
+%\label{fig:dfs_mediumMaze}
+%\end{figure}
+%
+%\begin{figure}[ht]
+%\centering
+%\includegraphics[scale=0.55]{Question1/dfs_bigMaze.png}
+%\caption{DFS performance in big maze}
+%\label{fig:dfs_bigMaze}
+%\end{figure}
+
+
 \end{homeworkProblem}
 
 %----------------------------------------------------------------------------------------

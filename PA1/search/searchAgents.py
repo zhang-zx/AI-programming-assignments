@@ -364,7 +364,9 @@ class CornersProblem(search.SearchProblem):
         return len(actions)
 
 import util
-
+import math
+def geodistance(dot1, dot2):
+    return math.sqrt((dot1[0]-dot2[0])**2 + (dot1[1]-dot2[1])**2)
 
 def cornersHeuristic(state, problem):
     """
@@ -393,15 +395,31 @@ def cornersHeuristic(state, problem):
     #     result = max(abs(pos[0] - corner[0]) + abs(pos[1] - corner[1]), 0)
     # # print result
     # return result
-    length = list()
+    
+    # length = list()
+    # result = 0
+    # for corner in corners:
+    #     if corner not in visitedCorners:
+    #         length.append(util.manhattanDistance(corner, pos))
+    #         # result += length[-1]
+    # if not length:
+    #     return 0
+    # return max(length)
+
+    leftCorners = list()
+    lengths = list()
     result = 0
     for corner in corners:
         if corner not in visitedCorners:
-            length.append(util.manhattanDistance(corner, pos))
-            # result += length[-1]
-    if not length:
+            leftCorners.append(corner)
+    if not leftCorners:
         return 0
-    return max(length)
+    while leftCorners:
+        length , corner= min([(util.manhattanDistance(pos, unVisitedCorner), unVisitedCorner) for unVisitedCorner in leftCorners])
+        result += length
+        pos = corner
+        leftCorners.remove(corner)
+    return result
     
 
 class AStarCornersAgent(SearchAgent):
@@ -494,14 +512,42 @@ def foodHeuristic(state, problem):
     Subsequent calls to this heuristic can access
     problem.heuristicInfo['wallCount']
     """
-    position, foodGrid = state
+    # position, foodGrid = state
+    # foodList = foodGrid.asList()
+    # length = list()
+    # for pos in foodList:
+    #     length.append(util.manhattanDistance(position, pos))
+    #     # position = pos
+    # if not length:
+    #     return 0
+    # return max(length)
+
+    # position, foodGrid = state
+    # foodList = foodGrid.asList()
+    # length = list()
+    # for pos in foodList:
+    #     length.append(util.manhattanDistance(position, pos))
+    #     # position = pos
+    # if not length:
+    #     return 0
+    # length.sort()
+    # return length[-1]
+
+
+    pos, foodGrid = state
     foodList = foodGrid.asList()
-    length = list()
-    for pos in foodList:
-        length.append(util.manhattanDistance(position, pos))
-    if not length:
-        return 0
-    return max(length)
+    result = 0
+    if foodList:
+        length, food = min([(util.manhattanDistance(pos, food), food) for food in foodList])
+        pos = food
+        foodList.remove(food)
+        result += length
+    if foodList:
+        length, food = max([(util.manhattanDistance(pos, food), food) for food in foodList])
+        pos = food
+        foodList.remove(food)
+        result += length
+    return result
 
 class ClosestDotSearchAgent(SearchAgent):
     "Search for all food using a sequence of searches"
@@ -520,6 +566,20 @@ class ClosestDotSearchAgent(SearchAgent):
         self.actionIndex = 0
         print 'Path found with cost %d.' % len(self.actions)
 
+    def getSuccessors(self, state):
+        "Returns successor states, the actions they require, and a cost of 1."
+        successors = []
+        self._expanded += 1 # DO NOT CHANGE
+        for direction in [Directions.NORTH, Directions.SOUTH, Directions.EAST, Directions.WEST]:
+            x,y = state[0]
+            dx, dy = Actions.directionToVector(direction)
+            nextx, nexty = int(x + dx), int(y + dy)
+            if not self.walls[nextx][nexty]:
+                nextFood = state[1].copy()
+                nextFood[nextx][nexty] = False
+                successors.append( ( ((nextx, nexty), nextFood), direction, 1) )
+        return successors
+
     def findPathToClosestDot(self, gameState):
         """
         Returns a path (a list of actions) to the closest dot, starting from
@@ -532,7 +592,31 @@ class ClosestDotSearchAgent(SearchAgent):
         problem = AnyFoodSearchProblem(gameState)
 
         "*** YOUR CODE HERE ***"
-        util.raiseNotDefined()
+        # print food.asList()
+        # print startPosition
+        # print walls.asList()
+        foodList = food.asList()
+
+        frontier = util.Queue()
+        visited = list()
+        frontier.push( (startPosition, []) )
+        while not frontier.isEmpty():
+            pos, actions = frontier.pop()
+            if pos in foodList:
+                return actions
+            if problem.isGoalState(pos):
+                return actions
+            if pos not in visited:
+                visited.append(pos)
+            for next_state in problem.getSuccessors(pos):
+                n_state = next_state[0]
+                n_direction = next_state[1]
+                if n_state not in visited:
+                    frontier.push( (n_state, actions + [n_direction]) )
+                    visited.append( n_state )
+                # print n_state
+        return []
+        # util.raiseNotDefined()
 
 class AnyFoodSearchProblem(PositionSearchProblem):
     """
@@ -568,7 +652,10 @@ class AnyFoodSearchProblem(PositionSearchProblem):
         x,y = state
 
         "*** YOUR CODE HERE ***"
-        util.raiseNotDefined()
+        if self.food:
+            return False
+        return True
+        # util.raiseNotDefined()
 
 def mazeDistance(point1, point2, gameState):
     """

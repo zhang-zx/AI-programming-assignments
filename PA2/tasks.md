@@ -24,7 +24,7 @@
     - python autograder.py -q q2
 - AlphaBetaAgent
     - 在multiAgents.py中的AlphaBetaAgent中完成alpha-beta剪枝算法
-    - 使用python pacman.py -p AlphaBetaAgent -a depth=3 -l smallClassic 4 points进行测试
+    - 使用python pacman.py -p AlphaBetaAgent -a depth=3 -l smallClassic 进行测试
 - ExpectimaxAgent
     - 完成ExpectimaxAgent类
     - 使用python pacman.py -p AlphaBetaAgent -l trappedClassic -a depth=3 -q -n 10测试

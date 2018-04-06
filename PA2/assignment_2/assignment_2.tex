@@ -73,7 +73,6 @@
         stepnumber=5 % Line numbers go in steps of 5
 }
 
-% Creates a new command to include a perl script, the first parameter is the filename of the script (without .pl), the second parameter is the caption
 \newcommand{\pythonscript}[2]{
 \begin{itemize}
 \item[]\lstinputlisting[caption=#2,label=#1]{#1.py}
@@ -127,11 +126,8 @@
 %	NAME AND CLASS SECTION
 %----------------------------------------------------------------------------------------
 
-\newcommand{\hmwkTitle}{Assignment\ \#1} % Assignment title
-%\newcommand{\hmwkDueDate}{Tuesday,\ April\ 10,\ 2018} % Due date
+\newcommand{\hmwkTitle}{Assignment\ \#2} % Assignment title
 \newcommand{\hmwkClass}{人工智能导论} % Course/class
-%\newcommand{\hmwkClassTime}{} % Class/lecture time
-%\newcommand{\hmwkClassInstructor}{} % Teacher/lecturer
 \newcommand{\hmwkAuthorName}{张知行} % Your name
 \newcommand{\hmwkAuthorNumber}{2015012018}
 
@@ -167,133 +163,88 @@
 %\tableofcontents
 %\newpage
 
-%----------------------------------------------------------------------------------------
-%	PROBLEM 1
-%----------------------------------------------------------------------------------------
-
-% To have just one problem per page, simply put a \clearpage after each problem
-
-\begin{homeworkProblem}
-寻找固定位置的豆子包含下面四个问题：\\
-1. \homeworkSectionName{Finding a Fixed Food Dot using Depth First Search}\\
-2. \homeworkSectionName{Breadth First Search}\\
-3. \homeworkSectionName{Varying the Cost Function}\\
-4. \homeworkSectionName{A* search}\\
-算法在search.py中进行了实现，对各种算法在不同地图下的测试结果如表\ref{算法比较}：\\
-
-% Please add the following required packages to your document preamble:
-
-\begin{table}[ht]
-\centering
-\caption{各种算法在不同地图下的性能比较}
-\label{算法比较}
-\begin{tabular}{@{}c|cccc@{}}
-\toprule
-\textbf{Maps}                         & \textbf{Alg} & \textbf{Search nodes expanded} & \multicolumn{1}{l}{\textbf{Total Costs}} & \textbf{Scores} \\ \midrule
-\multirow{4}{*}{\textbf{tiny maze}}   & \textbf{DFS} & 14                             & 10                                       & 500             \\
-                                      & \textbf{BFS} & 15                             & 8                                        & 502             \\
-                                      & \textbf{UCS} & 15                             & 8                                        & 502             \\
-                                      & \textbf{A*}  & 14                             & 8                                        & 502             \\ \midrule
-\multirow{4}{*}{\textbf{medium maze}} & \textbf{DFS} & 144                            & 130                                      & 380             \\
-                                      & \textbf{BFS} & 269                            & 68                                       & 422             \\
-                                      & \textbf{UCS} & 269                            & 68                                       & 422             \\
-                                      & \textbf{A*}  & 221                            & 68                                       & 442             \\ \midrule
-\multirow{4}{*}{\textbf{big maze}}    & \textbf{DFS} & 390                            & 210                                      & 300             \\
-                                      & \textbf{BFS} & 620                            & 210                                      & 300             \\
-                                      & \textbf{UCS} & 620                            & 210                                      & 300             \\
-                                      & \textbf{A*}  & 549                            & 210                                      & 300             \\ \bottomrule
-\end{tabular}
-\end{table}
-\paragraph{}
-自动评测系统的第一问的评测样例或许有误，标准答案所给的最短路程并不是实际上的最短路程。其余三问的自动评测结果如图\ref{bfs_p1}，\ref{ucs_p1}，\ref{A*_p1}：
-\paragraph{}
-从测试结果中可以看出在不同尺度的地图下，各种算法各有优劣之处，在地图所展现的数量级上没有表现出明显的差异。主要实现难度在对API的使用方面，在熟悉API接口之后，这些均有固定算法可以实现。其中UCS和A*方法中对heapq的使用需要重写update函数，否则会造成搜索过程中的混乱。
-\paragraph{}
-四种方式都可以完成任务，但是这种搜索最优的方式与所给数据数量级并不是线性相关的，当所给数据的数据量较大的情况下，可能会导致时间复杂度较高，如果可以实现一种并不是最优解，但是线性时间内可解决的算法，那应该在大数量级的情况下具有较好的表现。
-\paragraph{}
-所要解决的问题中只有一个最终的目标，因此BFS和DFS搜索方式本质上会得到一样的结果，但是如果有多个目标需要得到，同时不需要得到一个最优解，那么使用贪心算法BFS会是一个更优的选择。
-\paragraph{}
-测试样例中的数据数量级较低，在这种情况下使用A*算法的优势并不大，但是在较大数量级下，如果有一个较好的启发式函数设计，那么A*算法会体现出较大的优势。同时，在后续寻找所有角落的问题中，使用A*算法也是一个比较简单的选择，如果使用BFS或者DFS那么程序效率较低，访问节点数目较多，花费时间较长，比较结果如图\ref{bfs_p2}，\ref{astar_p1}。
-\begin{figure}
-\centering
-\begin{minipage}[t]{0.3\textwidth}
-\centering
-\includegraphics[width=6cm]{q2.png}
-\caption{BFS样例测试}
-\label{bfs_p1}
-\end{minipage}
-\begin{minipage}[t]{0.3\textwidth}
-\centering
-\includegraphics[width=6cm]{q3.png}
-\caption{UCS样例测试}
-\label{ucs_p1}
-\end{minipage}
-\begin{minipage}[t]{0.3\textwidth}
-\centering
-\includegraphics[width=6cm]{q4.png}
-\caption{A*样例测试}
-\label{A*_p1}
-\end{minipage}
-\end{figure}
-
-\begin{figure}
-\centering
-\begin{minipage}[t]{0.48\textwidth}
-\centering
-\includegraphics[width=6cm]{bfs_corner.png}
-\caption{BFS搜索所有角落}
-\label{bfs_p2}
-\end{minipage}
-\begin{minipage}[t]{0.48\textwidth}
-\centering
-\includegraphics[width=6cm]{astar_corner.png}
-\caption{A*搜索所有角落}
-\label{astar_p1}
-\end{minipage}
-\end{figure}
-
-
-
-
-
+\begin{homeworkProblem}[ReflexAgent]
+	\paragraph{}
+	Description: Improve the ReflexAgent in multiAgents.py to play respectably.
+	\paragraph{}
+	在autograder中的测试结果如图\ref{reflexAgent}。算法中对剩余食物，ghost和ghost的scaredTimer进行计算，得到估计得分，返回估计得分并完成任务。
+	
 \end{homeworkProblem}
 
-%----------------------------------------------------------------------------------------
-%	PROBLEM 2
-%----------------------------------------------------------------------------------------
-
-\begin{homeworkProblem}
-寻找角落包含下面两个问题:\\
-1. Finding All the Corners\\
-2. Corners Problem: Heuristic\\
-
-\paragraph{}
-问题需要找到所有的角落，需要对返回的数据结构进行修改，记录已经访问的角落，在返回的state中添加对角落的标记之后仿照之前的结构对isGoalState进行修改，就可以完成任务。在启发式函数的设计中，采用将所处位置和剩余角落之间连线的最小曼哈顿距离表示，既可以满足连续性，又可以满足较好的接近真实距离，从而减少了对多余节点的访问，具有较好的性能体现。
-
-
+\begin{homeworkProblem}[MinimaxAgent]
+	\begin{figure}[ht]
+		\centering
+		\begin{minipage}[t]{0.4\textwidth}
+		\centering
+		\includegraphics[width=6cm]{q_1.png}
+		\caption{ReflexAgent autograder}
+		\label{reflexAgent}
+		\end{minipage}
+		\centering
+		\begin{minipage}[t]{0.4\textwidth}
+		\centering
+		\includegraphics[width=6cm]{q_2.png}
+		\caption{MinimaxAgent autograder}
+		\label{minimaxAgent}
+		\end{minipage}
+		\centering
+		\begin{minipage}[t]{0.4\textwidth}
+		\centering
+		\includegraphics[width=6cm]{q_1.png}
+		\caption{AlphaBetaAgent autograder}
+		\label{alphabetaAgent}
+		\end{minipage}
+		\begin{minipage}[t]{0.4\textwidth}
+		\centering
+		\includegraphics[width=6cm]{q_4.png}
+		\caption{ExpectimaxAgent autograder}
+		\label{ExpectimaxAgent}
+		\end{minipage}
+	\end{figure}
+	\paragraph{}
+	Description: Write an adversarial search agent in the provided MinimaxAgent class stub in multiAgents.py.
+	\paragraph{}
+	这一问中需要实现minimax算法对PacMan之后行为进行规划，算法中需要考虑到迭代次数，深度以及agents的数目，这一点和PPT中伪代码有所不同，因此将分别针对PacMan和Ghost的Max和Min函数放在一个函数中，同时根据迭代次数进行深度和agent的判断。实现算法的测试结果如图\ref{minimaxAgent}。
+	\paragraph{}
+	由于在进行对对手的估计时，miniMax算法估计对手的最好情况，因此在进行地图测试时，存在一定可能的情况PacMan失败。同时，在图形界面进行测试的时候，可以发现存在一定的情况PacMan选择在一个地方停止移动，直到ghost来到PacMan附近的时候才可以驱动PacMan进行移动。如果强行修改代码除去PacMan停止不动的操作，可以发现在一定情况下，PacMan更快死亡。
+	
 \end{homeworkProblem}
 
-%----------------------------------------------------------------------------------------
-\begin{homeworkProblem}	
-\paragraph{}
-吃所有的dots包含以下两个问题：\\
-1. Eating All The Dots\\
-2. Suboptimal Search\\
-\paragraph{}
-问题7中需要得到所有的豆子，需要设计一个启发式函数，与问题六中的设计方式相似,但是并不将所有的点连接起来。在设计的算法中，先找到最近的豆子的曼哈顿距离，之后找到距这个豆子最远的豆子的曼哈顿距离，两个距离的和即可满足条件，既保证了连续性，又足够逼近真实值，在测试样例中有较好的体现。在autograder中，问题7的最后一个测试样例中可以实现展开节点数目为8178，如图\ref{q7}
-\begin{figure}[ht]
-	\centering
-	\includegraphics{q7.png}
-	\caption{问题7样例测试}
-	\label{q7}
-\end{figure}
-\paragraph{}
-问题8中需要使用贪心算法找到最近的豆子并进行线路规划，可以使用bfs进行设计，应该也可以使用ucs进行设计。在程序中实现了bfs设计的算法，可以满足测试样例条件，但是从在地图中的表现中可以看出，这种方式显然不是最优算法，过程中有很多的路程冗余。
-
-
+\begin{homeworkProblem}[AlphaBetaAgent]
+	
+	\paragraph{}
+	Description: Make a new agent that uses alpha­beta pruning to more efficiently explore the minimax tree, in AlphaBetaAgent.
+	\paragraph{}
+	这一问中需要在minimax的基础上进行剪枝的操作，只需要简单对minimax函数进行修改，在函数参数传递中传递$\alpha$ 和$\beta$，之后在选取时多一步判断即可完成剪枝操作。这一问在autograder中的测试结果如图\ref{alphabetaAgent}。经过测试，由于展开节点数目减少，alphaBeta剪枝算法同一深度进行搜索可以比MiniMax算法省略一定的时间。
+	\paragraph{}
+	但是，仍然可以发现，存在一定的情况由于对对方进行过高的估计，PacMan在一些地图上仍然会出现死亡或者停滞不前的情况。对于停止不动的情况可以通过算法中修改对PacMan的legalAction的筛选进行实现，但是在这种情况下，也存在PacMan死亡的情况。
 \end{homeworkProblem}
 
-
-
+\begin{homeworkProblem}[ExpectimaxAgent]
+	\paragraph{}
+	Description: Implement the ExpectimaxAgent.
+	\paragraph{}
+	这一问中使用一个期望值来对对手的选择进行估计，整体上算法实现和minimax中的实现相似，唯一的区别在于对ghost的agents进行估计时，将选择其中的最小值改变为返回其各种选择得分的平均值。使用autograder进行测试的结果如图\ref{ExpectimaxAgent}。这样可以较为合理地估计ghost的行为，从而成功率可能有一定的提升。但是计算量和minimax算法相当，大于alphabeta剪枝算法。
+\end{homeworkProblem}
+\newpage
+\begin{homeworkProblem}[Bonus: Better Evaluation Function]
+	\paragraph{}
+	Description: Write a better evaluation function for pacman in the provided function betterEvaluationFunction.
+	
+	\begin{figure}[ht]
+		\centering 
+		\begin{minipage}[t]{0.4\textwidth}
+		\centering
+			\includegraphics[width=6cm]{q_5.png}
+			\caption{Evaluation Function autograder performance}
+			\label{eval_func}
+		\end{minipage}
+		
+	\end{figure}
+	\paragraph{}
+	这一问需要利用当前状态进行评分，由于评分函数影响PacMan对之后的选择，可以考虑ghost，food，scaredtime等进行评估。使用ghost和scaredtime结合进行评估可以较好地实现任务，测试结果如图\ref{eval_func}。使用ghost进行评估标准时，可以有效避免游戏失败，但是由于ghost是驱动PacMan前进的唯一标准，这种评估方式的缺陷是：如果ghost在距离PacMan较远的位置运动，那么PacMan可能选择停止前进，同时，缺乏快速完成所有吃豆工作的动力。但是简单将food通过线性组合考虑进去之后，存在很大的不稳定性，在一些测试条件下会出现失败的情况，而且对选取的参数的要求较高。
+	
+	
+\end{homeworkProblem}
 
 \end{document}

@@ -298,7 +298,7 @@ def betterEvaluationFunction(currentGameState):
     "*** YOUR CODE HERE ***"
 
     score = currentGameState.getScore()
-    return score + scoreGhosts(currentGameState) 
+    return score + scoreGhosts(currentGameState) # - scoreFoods(currentGameState)
 
 # Abbreviation
 better = betterEvaluationFunction

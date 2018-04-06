@@ -1,4 +1,9 @@
 # Multi-Agent Pacman
+
+- http://ai.berkeley.edu/multiagent.html
+- https://github.com/jasonwu0731/AI-Pacman/blob/master/Pacman/hw2-multiagent/multiAgents.py
+- https://github.com/jasonwu0731/AI-Pacman/tree/master/Pacman/hw2-multiagent
+
 ## 测试
 - python autograder.py
 - python autograder.py -q q2

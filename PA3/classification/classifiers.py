@@ -123,27 +123,6 @@ class KNNClassifier(ClassificationMethod):
             closest_y=self.trainingLabels[y_indicies[: k]] 
             y_pred[i]=np.argmax(np.bincount(closest_y))
         return y_pred
-
-        # dataSize = self.trainingData.shape[0]
-        # diff = np.dot(self.trainingData, data.T)
-        # # diff = diff.T
-        # # print(len(diff))
-        # # print(len(diff[0]))
-        # classes = list()
-        # for j in range(len(diff)):
-        #     sortedIndex = np.argsort(diff[j])
-        #     classes.append(0)
-        #     classCount = dict()
-        #     for i in range(self.num_neighbors):
-        #         voteLabel = self.trainingLabels[sortedIndex[i]]
-        #         classCount[voteLabel] = classCount.get(voteLabel, 0) + 1
-        #     maxCount = 0
-        #     for key, value in classCount.items():
-        #         if value > maxCount:
-        #             maxCount = value
-        #             classes[j] = key
-        # return(np.array(classes).T)
-
         # util.raiseNotDefined()
 
 
@@ -172,7 +151,7 @@ class PerceptronClassifier(ClassificationMethod):
         self.learningRate = 1
         
     def setWeights(self, input_dim):
-        self.weights = np.random.randn(input_dim, len(self.legalLabels))/np.sqrt(input_dim)
+        self.weights = np.random.randn(784, len(self.legalLabels))/np.sqrt(input_dim)
         self.bias = np.zeros(len(self.legalLabels))
     
     def prepareDataBatches(self, traindata, trainlabel):
@@ -226,7 +205,28 @@ class PerceptronClassifier(ClassificationMethod):
             dataBatches = self.prepareDataBatches(trainingData, trainingLabels)
             for batchData, batchLabel in dataBatches:
                 "*** YOUR CODE HERE ***"
-                util.raiseNotDefined()
+                for i in range(len(batchData)):
+                    top_score = -1
+                    best_label = None
+                    current_datum = batchData[i]  # current image
+
+                    for label in self.legalLabels:
+                        # Calculate the prediction on the current image for every labels weights (0-9)
+                        # print(current_datum)
+                        result = np.dot((self.weights.T)[label] , current_datum )
+                        # print(result)
+                        if result > top_score:
+                            # save the result with the largest value - i.e most likely to be correct
+                            top_score = result
+                            best_label = label
+
+                    actual_label = batchLabel[i]
+                    if best_label != actual_label:  # prediction is incorrect
+                        # number_of_errors += 1
+                        # update weights
+                        (self.weights.T)[actual_label] = ((self.weights.T)[actual_label] + current_datum) # under predicted
+                        (self.weights.T)[best_label] = (self.weights.T)[best_label] - current_datum.T  # over predicted
+                # util.raiseNotDefined()
 
     def classify(self, data):
         """

@@ -80,6 +80,21 @@ class KNNClassifier(ClassificationMethod):
         # trainingData is normalized
         self.trainingData = trainingData / np.linalg.norm(trainingData, axis=1).reshape((len(trainingData), 1))
         self.trainingLabels = trainingLabels
+
+    def sim(self, X):
+        num_test = X.shape[0]
+        num_train = self.trainingData.shape[0]
+        # print("num_test:", num_test)
+        # print("num_train", num_train)
+        # dists = np.dot(X, self.trainingData.T)
+        # print(len(dists))
+        # print(len(dists[0]))
+        dists = np.zeros((num_test, num_train))
+        test_sum=np.sum(np.square(X),axis=1)
+        train_sum=np.sum(np.square(self.trainingData),axis=1)
+        inner_product=np.dot(X,self.trainingData.T)
+        dists=np.sqrt(-2*inner_product+test_sum.reshape(-1,1)+train_sum)
+        return dists
     
     def classify(self, data):
         """
@@ -98,7 +113,38 @@ class KNNClassifier(ClassificationMethod):
 
         "*** YOUR CODE HERE ***"
         # should compute sim(data[i], data[j]) = dot(data[i], data[j])
-        util.raiseNotDefined()
+        k = self.num_neighbors
+        dists = self.sim(data)
+        num_test=dists.shape[0]
+        y_pred=np.zeros(num_test)
+        for i in range(num_test):
+            closest_y=[]
+            y_indicies=np.argsort(dists[i,:],axis=0) 
+            closest_y=self.trainingLabels[y_indicies[: k]] 
+            y_pred[i]=np.argmax(np.bincount(closest_y))
+        return y_pred
+
+        # dataSize = self.trainingData.shape[0]
+        # diff = np.dot(self.trainingData, data.T)
+        # # diff = diff.T
+        # # print(len(diff))
+        # # print(len(diff[0]))
+        # classes = list()
+        # for j in range(len(diff)):
+        #     sortedIndex = np.argsort(diff[j])
+        #     classes.append(0)
+        #     classCount = dict()
+        #     for i in range(self.num_neighbors):
+        #         voteLabel = self.trainingLabels[sortedIndex[i]]
+        #         classCount[voteLabel] = classCount.get(voteLabel, 0) + 1
+        #     maxCount = 0
+        #     for key, value in classCount.items():
+        #         if value > maxCount:
+        #             maxCount = value
+        #             classes[j] = key
+        # return(np.array(classes).T)
+
+        # util.raiseNotDefined()
 
 
 class PerceptronClassifier(ClassificationMethod):

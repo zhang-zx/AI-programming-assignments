@@ -84,11 +84,6 @@ class KNNClassifier(ClassificationMethod):
     def sim(self, X):
         num_test = X.shape[0]
         num_train = self.trainingData.shape[0]
-        # print("num_test:", num_test)
-        # print("num_train", num_train)
-        # dists = np.dot(X, self.trainingData.T)
-        # print(len(dists))
-        # print(len(dists[0]))
         dists = np.zeros((num_test, num_train))
         test_sum=np.sum(np.square(X),axis=1)
         train_sum=np.sum(np.square(self.trainingData),axis=1)
@@ -123,7 +118,6 @@ class KNNClassifier(ClassificationMethod):
             closest_y=self.trainingLabels[y_indicies[: k]] 
             y_pred[i]=np.argmax(np.bincount(closest_y))
         return y_pred
-        # util.raiseNotDefined()
 
 
 class PerceptronClassifier(ClassificationMethod):
@@ -151,7 +145,7 @@ class PerceptronClassifier(ClassificationMethod):
         self.learningRate = 1
         
     def setWeights(self, input_dim):
-        self.weights = np.random.randn(784, len(self.legalLabels))/np.sqrt(input_dim)
+        self.weights = np.random.randn(input_dim, len(self.legalLabels))/np.sqrt(input_dim)
         self.bias = np.zeros(len(self.legalLabels))
     
     def prepareDataBatches(self, traindata, trainlabel):
@@ -208,25 +202,16 @@ class PerceptronClassifier(ClassificationMethod):
                 for i in range(len(batchData)):
                     top_score = -1
                     best_label = None
-                    current_datum = batchData[i]  # current image
-
+                    current_datum = batchData[i] 
                     for label in self.legalLabels:
-                        # Calculate the prediction on the current image for every labels weights (0-9)
-                        # print(current_datum)
                         result = np.dot((self.weights.T)[label] , current_datum )
-                        # print(result)
                         if result > top_score:
-                            # save the result with the largest value - i.e most likely to be correct
                             top_score = result
                             best_label = label
-
                     actual_label = batchLabel[i]
-                    if best_label != actual_label:  # prediction is incorrect
-                        # number_of_errors += 1
-                        # update weights
-                        (self.weights.T)[actual_label] = ((self.weights.T)[actual_label] + current_datum) # under predicted
-                        (self.weights.T)[best_label] = (self.weights.T)[best_label] - current_datum.T  # over predicted
-                # util.raiseNotDefined()
+                    if best_label != actual_label:  
+                        (self.weights.T)[actual_label] = ((self.weights.T)[actual_label] + current_datum) 
+                        (self.weights.T)[best_label] = (self.weights.T)[best_label] - current_datum.T 
 
     def classify(self, data):
         """
@@ -272,8 +257,12 @@ class SVMClassifier(ClassificationMethod):
         """
         from sklearn import svm
          
-        "*** YOUR CODE HERE ***"
-        util.raiseNotDefined()
+        # "*** YOUR CODE HERE ***"
+        self.sklearn_svm = svm.SVC(C = 10, kernel='rbf', probability=True)
+        self.sklearn_svm.fit(trainingData, trainingLabels)
+
+    
+        # util.raiseNotDefined()
         
     
     def classify(self, data):
@@ -281,7 +270,8 @@ class SVMClassifier(ClassificationMethod):
         classification with SVM using sklearn API
         """
         "*** YOUR CODE HERE ***"
-        util.raiseNotDefined()
+        return self.sklearn_svm.predict(data)
+        # util.raiseNotDefined()
 
         
 class BestClassifier(ClassificationMethod):
@@ -297,6 +287,10 @@ class BestClassifier(ClassificationMethod):
         self.legalLabels = legalLabels
         
         "*** YOUR CODE HERE (If needed) ***"
+        self.sklearn_svm = None  
+        self.compontNum = 35
+        self.pca = None
+
     
     def train( self, trainingData, trainingLabels, validationData, validationLabels ):
         """
@@ -305,12 +299,21 @@ class BestClassifier(ClassificationMethod):
         For digit data, trainingData/validationData are all in numpy format with size ([number of data], 784)
         """
         "*** YOUR CODE HERE ***"
-        util.raiseNotDefined()
+        from sklearn.decomposition import PCA
+        from sklearn.svm import SVC
+        self.pca = PCA(n_components=self.compontNum, whiten=True)
+        self.pca.fit(trainingData) 
+        trainingData = self.pca.transform(trainingData)
+        self.sklearn_svm = SVC(C=100, gamma=0.015)
+        self.sklearn_svm.fit(trainingData, trainingLabels)
+
+    
     
     def classify(self, data):
         """
         classification with the designed classifier
         """
         "*** YOUR CODE HERE ***"
-        util.raiseNotDefined()
+        data = self.pca.transform(data)
+        return self.sklearn_svm.predict(data)
 

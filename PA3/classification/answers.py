@@ -18,4 +18,4 @@ def q3():
     :return: 'a' or 'b'
     """
     "*** YOUR CODE HERE ***"
-    return None
+    return 'a'

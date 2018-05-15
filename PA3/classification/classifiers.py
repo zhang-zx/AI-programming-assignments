@@ -202,16 +202,16 @@ class PerceptronClassifier(ClassificationMethod):
                 for i in range(len(batchData)):
                     top_score = -1
                     best_label = None
-                    current_datum = batchData[i] 
+                    current_data = batchData[i] 
                     for label in self.legalLabels:
-                        result = np.dot((self.weights.T)[label] , current_datum )
+                        result = np.dot((self.weights.T)[label] , current_data )
                         if result > top_score:
                             top_score = result
                             best_label = label
                     actual_label = batchLabel[i]
                     if best_label != actual_label:  
-                        (self.weights.T)[actual_label] = ((self.weights.T)[actual_label] + current_datum) 
-                        (self.weights.T)[best_label] = (self.weights.T)[best_label] - current_datum.T 
+                        (self.weights.T)[actual_label] = ((self.weights.T)[actual_label] + current_data) 
+                        (self.weights.T)[best_label] = (self.weights.T)[best_label] - current_data.T 
 
     def classify(self, data):
         """

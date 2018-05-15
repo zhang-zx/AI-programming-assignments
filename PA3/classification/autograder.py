@@ -3,7 +3,7 @@
 import sys, time, traceback
 import os
 
-import solution_classifiers as classifiers
+import classifiers as classifiers
 from featureExtractor import *
 import answers
 

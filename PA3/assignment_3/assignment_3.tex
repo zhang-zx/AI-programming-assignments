@@ -220,6 +220,25 @@
 	\paragraph{SVM的参数设定}
 	SVM的参数如\ref{q_3}。其中$C$为惩罚参数，$C$越大，相当于惩罚松弛变量，希望松弛变量接近0，即对误分类的惩罚增大，趋向于对训练集全分对的情况，这样对训练集测试时准确率很高，但泛化能力弱。$C$值小，对误分类的惩罚减小，允许容错，将他们当成噪声点，泛化能力较强。$kernel$是核函数，默认是$rbf$，可以是$linear$, $poly$, $rbf$, $sigmoid$, $precomputed$ ，核函数主要用来针对线性不可分的情况，可以将数据映射到高维空间中来实现分割，在这个问题中，使用$rbf$有着较好的效果。$gamma$是$rbf$，$poly$和$sigmoid$的核函数参数。默认是$auto$，$gammma = \frac{1}{n\_features}$。
 	\pythonscript{q_3}{SVM}
+	\begin{figure}[ht]
+		\centering
+		\begin{minipage}[t]{0.4\textwidth}
+		\centering
+		\includegraphics[width=6cm]{C.png}
+		\caption{改变C值对准确率的影响}
+		\label{C}
+		\end{minipage}
+		\centering
+		\begin{minipage}[t]{0.4\textwidth}
+		\centering
+		\includegraphics[width=6cm]{gamma.png}
+		\caption{改变Gamma对准确率的影响}
+		\label{gamma}
+		\end{minipage}
+		\centering
+	\end{figure}
+	\paragraph{SVM参数设定比较}
+	改变SVM参数设定中的C值，预测函数的准确率会发生改变，在$gamma = 0.015$的情况下，设定$C$值分别为$1, 10, 100, 1000$对准确率进行测试，测试结果如图\ref{C}。可以看出，$C$值增大，准确率首先提高，但是当$C$值超出一定数值之后，其增大效果不再在准确率上体现出来，当$C = 1000$时，模型仍然没有表现出过拟合现象。之后，固定$C = 10$，对$Gamma$值进行改变，测试预测准确率如图\ref{gamma}，可以看出，准确率对$Gamma$值的改变相对来说比较敏感，因此选择测试样本准确率最高的一组$gamma = 0.015$作为最终的参数。
 \end{homeworkProblem}
 
 \begin{homeworkProblem}[Better Classification Accuracy]
@@ -230,7 +249,7 @@
 	\paragraph{}
 	如果直接使用原始数据进行SVM分类，效果较差，因此考虑使用PCA进行特征提取降维，对降维之后的数据采用支持向量机进行分类。需要进行调整的超参数主要有PCA提取的特征数目，以及SVM中的想过超参数，经过多次测试$n\_components = 35, C=100, gamma=0.015$时整个模型有着较好的预测效果，测试的结果如图\ref{Better Classification Accuracy}。
 	\paragraph{}
-	对于SVM的参数设定，如果设定的$C$值过大，那么模型对误分类的惩罚值过大，十分容易出现过拟合的现象，模型在验证集和测试集上的表现会很差。但是如果设定的值过小，则会出现特征不明确的现象，误分类比例较大，同样会造成表现差的现象。对于PCA提取特征数目的设定，如果设定的数目过低，那么提取出的特征无法准确描述该分类的特征，但是如果提取的数目过多，那么会造成对噪音的过滤不够完全，优化效果不够明显的现象。从最终测试得到的较优的参数设定以及测试结果来看，每个分类大致需要35个特征值就可以准确唯一描述，同时$C=100$的惩罚值设定并没有造成过拟合现象。
+	对于SVM的参数设定，如果设定的$C$值过大，那么模型对误分类的惩罚值过大，容易出现过拟合的现象，模型在验证集和测试集上的表现会很差。但是如果设定的值过小，则会出现特征不明确的现象，误分类比例较大，同样会造成表现差的现象。对于PCA提取特征数目的设定，如果设定的数目过低，那么提取出的特征无法准确描述该分类的特征，但是如果提取的数目过多，那么会造成对噪音的过滤不够完全，优化效果不够明显的现象。从最终测试得到的较优的参数设定以及测试结果来看，每个分类大致需要35个特征值就可以准确唯一描述，同时$C=100$的惩罚值设定并没有造成过拟合现象。
 \end{homeworkProblem}
 
 \end{document}

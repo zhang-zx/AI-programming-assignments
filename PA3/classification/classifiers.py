@@ -258,7 +258,7 @@ class SVMClassifier(ClassificationMethod):
         from sklearn import svm
          
         # "*** YOUR CODE HERE ***"
-        self.sklearn_svm = svm.SVC(C = 10, kernel='rbf', probability=True)
+        self.sklearn_svm = svm.SVC(C = 10, gamma=0.015, kernel='rbf', probability=True)
         self.sklearn_svm.fit(trainingData, trainingLabels)
 
     

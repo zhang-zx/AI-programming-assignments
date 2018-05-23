@@ -258,7 +258,7 @@ class SVMClassifier(ClassificationMethod):
         from sklearn import svm
          
         # "*** YOUR CODE HERE ***"
-        self.sklearn_svm = svm.SVC(C = 10, kernel='rbf', probability=True)
+        self.sklearn_svm = svm.SVC(C = 10, gamma=0.015, kernel='rbf', probability=True)
         self.sklearn_svm.fit(trainingData, trainingLabels)
 
     
@@ -303,8 +303,10 @@ class BestClassifier(ClassificationMethod):
         from sklearn.svm import SVC
         self.pca = PCA(n_components=self.compontNum, whiten=True)
         self.pca.fit(trainingData) 
+        trainingData = np.vstack((trainingData, validationData))
+        trainingLabels = np.hstack((trainingLabels, validationLabels))
         trainingData = self.pca.transform(trainingData)
-        self.sklearn_svm = SVC(C=100, gamma=0.015)
+        self.sklearn_svm = SVC(C=3, gamma=1/35.0)
         self.sklearn_svm.fit(trainingData, trainingLabels)
 
     

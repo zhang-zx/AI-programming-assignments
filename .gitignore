@@ -5,6 +5,7 @@ __pycache__/
 
 # C extensions
 *.so
+
 *.sublime*
 .texpadtmo/
 # Distribution / packaging
@@ -103,3 +104,4 @@ venv.bak/
 
 # mypy
 .mypy_cache/
+

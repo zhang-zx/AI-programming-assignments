@@ -4,7 +4,7 @@
 
 \documentclass{article}
 \usepackage{xeCJK} %调用 xeCJK 宏包
-\setCJKmainfont{STFangsong} %设置 CJK 主字体为 SimSun （宋体）
+\setCJKmainfont{STSong} %设置 CJK 主字体为 SimSun （宋体）
 %\setCJKmainfont[BoldFont=STZhongsong]{STSong}
 \setCJKsansfont[BoldFont=STHeiti]{STXihei}
 \setCJKmonofont{STFangsong}
@@ -27,7 +27,7 @@
 \textheight=9.0in
 \headsep=0.25in
 
-\linespread{1.1} % Line spacing
+\linespread{1.3} % Line spacing
 
 % Set up the header and footer
 \pagestyle{fancy}
@@ -129,7 +129,7 @@
 %	NAME AND CLASS SECTION
 %----------------------------------------------------------------------------------------
 
-\newcommand{\hmwkTitle}{Assignment\ \#3} % Assignment title
+\newcommand{\hmwkTitle}{Assignment\ \#4} % Assignment title
 \newcommand{\hmwkClass}{人工智能导论} % Course/class
 \newcommand{\hmwkAuthorName}{张知行} % Your name
 \newcommand{\hmwkAuthorNumber}{2015012018}
@@ -164,73 +164,134 @@
 %\tableofcontents
 %\newpage
 
-\begin{homeworkProblem}[KNN classifier]
+\begin{homeworkProblem}[Value Iteration]
 	\paragraph{}
-	Description: Implement a simple KNN classifier.
+	Description: Write a value iteration agent in ValueIterationAgent, which has been partially specified in valueIterationAgents.py. ValueIterationAgent agent is an offline planner, not a reinforcement learning agent, and so the relevant training option is the number of iterations of value iteration it should run (option -i) in its initial planning phase. 
 	\paragraph{}
-	测试时的准确率如图\ref{KNN}，在测试数据集上的准确率为93.0\%，有着较好的性能表现。在使用推荐的差别函数$sim(x, y) = x^T \cdot y$时，准确率较低，无法实现问题要求的准确率，因此改为使用欧式距离，发现有较好的准确率表现，而且没有过拟合现象发生，因此使用欧式距离作为KNN的距离判定方式。
-	
-\end{homeworkProblem}
-
-\begin{homeworkProblem}[Perceptron]
+	由于实现的$ValueIterationAgent$是一个离线的算法，因此需要在初始化的时候对后续所有情况进行计算并进行存储。在每次迭代中，计算所有状态下的$QValue$，使用最后的$QValue$以及记录下的每个状态下最好的操作方式作为最终的结果来对$agent$进行操作。每个格点上的$Value$是在该格点所有可能动作下$QValue$的最大值，同样，在该格点处选择的操作也是$QValue$最大的操作对应的值。使用100次迭代计算得到的结果如Figure\ref{q1value}和Figure\ref{q1QValue}所示。
 	\begin{figure}[ht]
 		\centering
 		\begin{minipage}[t]{0.4\textwidth}
 		\centering
-		\includegraphics[width=6cm]{q_1.png}
-		\caption{KNN}
-		\label{KNN}
+		\includegraphics[width=6cm]{q1_100_Value.png}
+		\caption{Values after 100 iterations}
+		\label{q1value}
 		\end{minipage}
 		\centering
 		\begin{minipage}[t]{0.4\textwidth}
 		\centering
-		\includegraphics[width=6cm]{q_2.png}
-		\caption{Perceptron}
-		\label{Perceptron}
+		\includegraphics[width=6cm]{q1_100_QValues.png}
+		\caption{QValues after 100 iterations}
+		\label{q1QValue}
 		\end{minipage}
 		\centering
-		\begin{minipage}[t]{0.4\textwidth}
-		\centering
-		\includegraphics[width=6cm]{q_3.png}
-		\caption{SVM with sklearn}
-		\label{SVM}
-		\end{minipage}
-		\begin{minipage}[t]{0.4\textwidth}
-		\centering
-		\includegraphics[width=6cm]{q_4.png}
-		\caption{Better Classification Accuracy}
-		\label{Better Classification Accuracy}
-		\end{minipage}
 	\end{figure}
 	\paragraph{}
-	Description: Implement a perception (or it can also be called softmax regression) classifier.
-	\paragraph{}
-	这一问中需要实现一个感知机，感知机需要通过在迭代过程中不断更新权重使得权重更能近似描述各种分类的特征，实现思路为：对每一个训练样本进行描述之后使用该训练样本的各个点的大小来更新权重，由于样本都是0-1之间的小数，所以使用这种方式最终结果大致为所有的同一类的样本进行叠加的效果，可以很好的描述各个分类。算法的测试结果如图\ref{Perceptron}。
-	\paragraph{}
-	这一问中需要对权重可视化的结果进行选择，由于感知机的权重需要用来描述每个分类下的所有特征，大致上为该分类下所有样本的叠加的效果，因此图像描述不可能为精准的图像，因此选择(a)选项。
-	
+	其余设定不变，分别进行100次和5次迭代之后进行10次测试得到的结果，如Figure\ref{q1100}和Figure\ref{q15}所示。可以看出增加迭代次数会减少错误率，更好地实现路径规划。
+	\begin{figure}[ht]
+		\centering
+		\begin{minipage}[t]{0.4\textwidth}
+		\centering
+		\includegraphics[width=6cm]{q1_100_return.png}
+		\caption{Returns after 100 iterations}
+		\label{q1100}
+		\end{minipage}
+		\centering
+		\begin{minipage}[t]{0.4\textwidth}
+		\centering
+		\includegraphics[width=6cm]{q1_5_return.png}
+		\caption{Returns after 5 iterations}
+		\label{q15}
+		\end{minipage}
+		\centering
+	\end{figure}
 \end{homeworkProblem}
 
-\begin{homeworkProblem}[SVM with sklearn]
-	
+\begin{homeworkProblem}[Parameter Analysis in Value Iteration]
 	\paragraph{}
-	Description: Utilize the SVM algorithm in sklearn for classification.
+	Description: Change parameters so that the optimal policy causes the agent to attempt to cross the bridge.
 	\paragraph{}
-	这一问需要使用scikit-learn中的SVM的API进行实现，在进行一系列参数的设定之后，这一问的测试结果如图\ref{SVM}。使用的参数为$C=10, kernel = 'rbf'$。
-	\paragraph{SVM的参数设定}
-	SVM的参数如\ref{q_3}。其中$C$为惩罚参数，$C$越大，相当于惩罚松弛变量，希望松弛变量接近0，即对误分类的惩罚增大，趋向于对训练集全分对的情况，这样对训练集测试时准确率很高，但泛化能力弱。$C$值小，对误分类的惩罚减小，允许容错，将他们当成噪声点，泛化能力较强。$kernel$是核函数，默认是$rbf$，可以是$linear$, $poly$, $rbf$, $sigmoid$, $precomputed$ ，核函数主要用来针对线性不可分的情况，可以将数据映射到高维空间中来实现分割，在这个问题中，使用$rbf$有着较好的效果。$gamma$是$rbf$，$poly$和$sigmoid$的核函数参数。默认是$auto$，$gammma = \frac{1}{n\_features}$。
-	\pythonscript{q_3}{SVM}
+	这一问中需要深入理解第一问中实现的$ValueIterationAgent$的具体的参数的功能。在初始的参数设定下，agent会通过局部较好的情况走向分数较小的最终结果，需要改变参数中的$Discount$或者$Noise$的数值来实现Agent更为长远的考虑。从$ValueIterationAgent$中使用的计算$QValue$的公式来看，对于越远的位置，由于discount造成的影响越大，造成下一步中计算得到向该方向前进的可能性越小，但是初始的$discount$的数值为$0.9$可以向上调整的幅度不大，并且经过测试，过大的$discount$会造成选择特别差的路径。因此对$Noise$进行修改。通过修改，发现将$Noise$降低到$0.02$之后会很大程度上降低向左的数值，但是仍然会有走向低分的规划。最终测试结果发现$Noise = 0.001$可以很好地实现要求的结果，最终结果如Figure\ref{q2}。
+	\begin{figure}[ht]
+		\centering
+		\begin{minipage}[t]{0.7\textwidth}
+		\centering
+		\includegraphics[width=12cm]{q2.png}
+		\caption{Values after 100 iterations}
+		\label{q2}
+		\end{minipage}
+		\centering
+	\end{figure}
 \end{homeworkProblem}
 
-\begin{homeworkProblem}[Better Classification Accuracy]
+\begin{homeworkProblem}[Q-Learning]
+	\begin{figure}[ht]
+		\centering
+		\begin{minipage}[t]{0.4\textwidth}
+		\centering
+		\includegraphics[width=6cm]{q4_5.png}
+		\caption{Values after 5 episodes}
+		\label{q4_5}
+		\end{minipage}
+		\centering
+		\begin{minipage}[t]{0.4\textwidth}
+		\centering
+		\includegraphics[width=6cm]{q4_100.png}
+		\caption{Values after 100 episodes}
+		\label{q4_100}
+		\end{minipage}
+		\centering
+		\begin{minipage}[t]{0.4\textwidth}
+		\centering
+		\includegraphics[width=6cm]{q4_5_r.png}
+		\caption{Results after 5 episodes}
+		\label{q4_5_r}
+		\end{minipage}
+		\centering
+		\begin{minipage}[t]{0.4\textwidth}
+		\centering
+		\includegraphics[width=6cm]{q4_100_r.png}
+		\caption{Results after 5 episodes}
+		\label{q4_100_r}
+		\end{minipage}
+		\centering
+	\end{figure}
+
 	\paragraph{}
-	Description: Design a classification algorithm to get as best accuracy as you can.
+	Description: Implement the update, computeValueFromQValues, getQValue, computeActionFromQValues methods in QLearningAgent in qlearningAgents.py.
 	\paragraph{}
-	这一问要求设计一个分类器，来实现良好的分类准确性，根据之前的分类效果来看，SVM具有较好的分类效果，因此这一问中继续采用scikit-learn的SVM作为分类器，主要目标是通过对超参数的调节实现较好的分类效果。
+	这一问中需要对$QLearning$进行实现，是一个通过不断的实践进行学习的算法，核心主要在$update$过程中，当前状态进行一个动作对应的$QValue$是之前同样情况下进行相同操作的$QValue$的数值和下一个状态下之前经验的一个组合。分别使用5次训练和100次训练查看结果如Figure\ref{q4_5},\ref{q4_100},\ref{q4_5_r},\ref{q4_100_r}。可以看出通过大量的训练测试结果有了很好地提升。
+	\end{homeworkProblem}
+
+\begin{homeworkProblem}[Q-Learning and Pacman]
 	\paragraph{}
-	如果直接使用原始数据进行SVM分类，效果较差，因此考虑使用PCA进行特征提取降维，对降维之后的数据采用支持向量机进行分类。需要进行调整的超参数主要有PCA提取的特征数目，以及SVM中的想过超参数，经过多次测试$n\_components = 35, C=100, gamma=0.015$时整个模型有着较好的预测效果，测试的结果如图\ref{Better Classification Accuracy}。
-	\paragraph{}
-	对于SVM的参数设定，如果设定的$C$值过大，那么模型对误分类的惩罚值过大，十分容易出现过拟合的现象，模型在验证集和测试集上的表现会很差。但是如果设定的值过小，则会出现特征不明确的现象，误分类比例较大，同样会造成表现差的现象。对于PCA提取特征数目的设定，如果设定的数目过低，那么提取出的特征无法准确描述该分类的特征，但是如果提取的数目过多，那么会造成对噪音的过滤不够完全，优化效果不够明显的现象。从最终测试得到的较优的参数设定以及测试结果来看，每个分类大致需要35个特征值就可以准确唯一描述，同时$C=100$的惩罚值设定并没有造成过拟合现象。
+	这一问中要求修改$QLearningAgent$使其可以适配于PacMan的操作，通过测试，发现上一问中实现的代码可以很好地适用于这一问中的测试中，$autograder$测试结果如Figure \ref{q5}。同时，通过测试可以发现，在较小的Grid下PacMan可以有很好地表现。但是，如果使用较大的Grid，PacMan则会出现静止不动的现象，最终会造成失败，主要原因可能是状态过多，学习效果较差，PacMan无法分辨Ghost的危险。因此这种算法并不具有大规模下使用的能力。
+	\begin{figure}[ht]
+		\centering
+		\begin{minipage}[t]{0.4\textwidth}
+		\centering
+		\includegraphics[width=6cm]{q5.png}
+		\caption{Autograder result}
+		\label{q5}
+		\end{minipage}
+		\centering
+	\end{figure}
 \end{homeworkProblem}
 
+\begin{homeworkProblem}[Approximate Q-Learning]
+	\paragraph{}
+	Description: Implement an approximate Q-learning agent that learns weights for features of states.
+	\paragraph{}
+	这一问需要使用特征提取函数进行学习，从而可以实现更好的学习效果，和上一问中最大的区别是使用提取出来的特征作为字典的key值而不是(state, action)的二元组。使用这种学习方法可以看出有着较好的学习效果，很好地解决了上一问中PacMan在较大的地图下无法进行判断的问题。最终结果使用各种地图进行测试几乎都会得到胜利的结果，$autograder$测试结果如Figure \ref{q6}。
+	\begin{figure}[ht]
+		\centering
+		\begin{minipage}[t]{0.4\textwidth}
+		\centering
+		\includegraphics[width=6cm]{q6.png}
+		\caption{Autograder result}
+		\label{q6}
+		\end{minipage}
+		\centering
+	\end{figure}
+\end{homeworkProblem}
 \end{document}

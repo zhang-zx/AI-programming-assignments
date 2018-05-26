@@ -80,7 +80,8 @@ class QLearningAgent(ReinforcementAgent):
         if not legalActions:
           return None
         import numpy as np
-        return legalActions[np.argmax([self.getQValue(state, action) for action in legalActions])]
+        return legalActions[np.argmax([self.getQValue(state, action) 
+          for action in legalActions])]
 
     def getAction(self, state):
         """
@@ -114,7 +115,8 @@ class QLearningAgent(ReinforcementAgent):
         """
         "*** YOUR CODE HERE ***"
         currQValue = self.getQValue(state,action)
-        self.QValue[(state,action)] = currQValue * (1 - self.alpha) + self.alpha * (reward + self.discount * self.getValue(nextState))
+        self.QValue[(state,action)] = currQValue * (1 - self.alpha) \
+          + self.alpha * (reward + self.discount * self.getValue(nextState))
 
     def getPolicy(self, state):
         return self.computeActionFromQValues(state)
@@ -189,7 +191,8 @@ class ApproximateQAgent(PacmanQAgent):
         """
         "*** YOUR CODE HERE ***"
         features = self.featExtractor.getFeatures(state,action)
-        difference = reward + self.discount * self.getValue(nextState) - self.getQValue(state,action)
+        difference = reward + self.discount * self.getValue(nextState) \
+          - self.getQValue(state,action)
         for feature, featureVector in features.iteritems():
           self.weights[feature] += self.alpha * featureVector * difference
         # util.raiseNotDefined()

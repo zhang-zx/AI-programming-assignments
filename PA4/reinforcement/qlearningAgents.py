@@ -96,14 +96,11 @@ class QLearningAgent(ReinforcementAgent):
         # Pick Action
         legalActions = self.getLegalActions(state)
         action = None
-        "*** YOUR CODE HERE ***"
-        if not legalActions:
-          return action
-        rand = util.flipCoin(self.epsilon)
-        if rand:
-          action = random.choice(legalActions)
+        # epsilon greedy
+        if util.flipCoin(self.epsilon):
+            action = random.choice(legalActions)
         else:
-          action = self.getPolicy(state)
+            action = self.getPolicy(state)
         return action
 
     def update(self, state, action, nextState, reward):
